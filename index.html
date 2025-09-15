@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Site Under Construction</title>
+  <meta name="description" content="Our new website is being built. Check back soon!" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bg"></div>
+
+  <main class="card">
+    <div class="badge">🚧 Under Construction</div>
+    <h1>We’re building something new</h1>
+    <p class="lede">
+      Thanks for stopping by! Our site is in progress.
+      We’ll be live shortly—stay tuned.
+    </p>
+
+    <div class="barberpole" aria-hidden="true"></div>
+
+    <section class="info">
+      <div class="pill">
+        <span class="dot"></span>
+        Estimated launch: <strong>Q4 2025</strong>
+      </div>
+      <div class="pill">
+        <span class="dot green"></span>
+        Status: <strong>In active development</strong>
+      </div>
+    </section>
+
+    <form class="notify" action="https://formspree.io/f/your-form-id" method="POST">
+      <label for="email">Get notified at launch</label>
+      <div class="row">
+        <input id="email" name="email" type="email" placeholder="you@example.com" required />
+        <button type="submit">Notify me</button>
+      </div>
+      <small>No spam. Unsubscribe anytime.</small>
+    </form>
+
+    <ul class="links">
+      <li><a href="mailto:hello@example.com" class="link">Contact</a></li>
+      <li><a href="https://twitter.com/" class="link">Twitter/X</a></li>
+      <li><a href="https://www.linkedin.com/" class="link">LinkedIn</a></li>
+    </ul>
+
+    <footer>
+      <p>© <span id="year"></span> Your Company. All rights reserved.</p>
+    </footer>
+  </main>
+
+  <script>
+    // Set current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
