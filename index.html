@@ -1,61 +1,256 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Site Under Construction</title>
-  <meta name="description" content="Our new website is being built. Check back soon!" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FrableTech — IT Consulting & 3D Printing in Enid, OK</title>
+  <meta name="description" content="FrableTech provides IT consulting, automation, and custom 3D printing/design services in Enid, Oklahoma.">
+  <meta name="author" content="FrableTech">
+  <style>
+    :root {
+      --bg: #070b16;
+      --panel: #0b1226;
+      --text: #e8f6ff;
+      --muted: #a5b6c7;
+      --cyan: #00f2ff;
+      --violet: #9a4dff;
+      --glow: 0 0 16px rgba(0,242,255,.35), 0 0 32px rgba(154,77,255,.2);
+      --ring: drop-shadow(0 0 6px #00f2ff) drop-shadow(0 0 14px #9a4dff);
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
+    a { color: var(--cyan); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    header { position: sticky; top: 0; z-index: 50; background: linear-gradient(180deg, rgba(7,11,22,.95), rgba(7,11,22,.75)); backdrop-filter: blur(6px); border-bottom: 1px solid rgba(255,255,255,.06); }
+    nav { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 800; letter-spacing: .3px; }
+    .brand img { height: 40px; filter: var(--ring); }
+    .brand .name { font-size: 1.1rem; background: linear-gradient(90deg, var(--cyan), var(--violet)); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: var(--glow); }
+    .links a { margin-left: 18px; font-weight: 600; color: var(--text); opacity: .9; }
+    .links a:hover { opacity: 1; color: var(--cyan); text-shadow: var(--glow); }
+    .hero {
+      position: relative; overflow: hidden; border-bottom: 1px solid rgba(255,255,255,.08);
+      background: radial-gradient(1200px 600px at 60% -10%, rgba(0,242,255,.12), transparent 60%),
+                  radial-gradient(900px 500px at 20% -20%, rgba(154,77,255,.10), transparent 55%),
+                  var(--bg);
+      padding: 80px 0 120px;
+    }
+    .hero::before {
+      content: ""; position: absolute; inset: -2px;
+      background:
+        linear-gradient(transparent 60%, rgba(0,242,255,.06)),
+        repeating-linear-gradient(0deg, rgba(255,255,255,.04) 0px, rgba(255,255,255,.04) 1px, transparent 1px, transparent 12px);
+      pointer-events: none;
+    }
+    .hero-grid {
+      position:absolute; inset: 0; opacity:.25; background:
+        radial-gradient(1000px 600px at 50% 100%, rgba(0,242,255,.15), transparent 60%),
+        linear-gradient(transparent 40%, rgba(154,77,255,.12));
+      mask-image: linear-gradient(180deg, transparent 0, #000 20%, #000 80%, transparent 100%);
+    }
+    .hero-grid::before, .hero-grid::after {
+      content:""; position:absolute; left:50%; transform:translateX(-50%) perspective(600px) rotateX(60deg);
+      width: 200vw; height: 200vh; background-image:
+        repeating-linear-gradient(90deg, rgba(0,242,255,.25) 0 1px, transparent 1px 64px),
+        repeating-linear-gradient(0deg, rgba(154,77,255,.25) 0 1px, transparent 1px 64px);
+      bottom: -50vh;
+    }
+    .hero .content { position: relative; z-index: 2; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 36px; align-items: center; }
+    .kicker { text-transform: uppercase; letter-spacing: .22em; font-size: .8rem; color: var(--muted); margin-bottom: 10px; }
+    h1 { font-size: clamp(2rem, 4vw + 1rem, 3.4rem); margin: 0 0 14px; line-height: 1.08; }
+    h1 .grad { background: linear-gradient(90deg, var(--cyan), var(--violet)); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: var(--glow); }
+    .lead { font-size: 1.1rem; color: #cfe9ff; opacity: .95; }
+    .cta { display: flex; gap: 14px; margin-top: 22px; flex-wrap: wrap; }
+    .btn {
+      display:inline-flex; align-items:center; gap:10px; padding:12px 18px; border-radius: 999px; font-weight: 700; letter-spacing:.2px;
+      background: linear-gradient(90deg, rgba(0,242,255,.12), rgba(154,77,255,.12));
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.06), 0 8px 24px rgba(0,0,0,.5);
+      color: var(--text);
+    }
+    .btn.primary { background: linear-gradient(90deg, rgba(0,242,255,.2), rgba(154,77,255,.2)); border-color: rgba(255,255,255,.2); filter: var(--ring); }
+    .btn:hover { transform: translateY(-1px); box-shadow: inset 0 0 0 1px rgba(255,255,255,.12), 0 12px 32px rgba(0,0,0,.55); }
+    .panel { background: linear-gradient(180deg, rgba(255,255,255,.02), transparent), var(--panel); border: 1px solid rgba(255,255,255,.08); border-radius: 18px; box-shadow: var(--glow); }
+    .illus { border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.03); }
+    .illus img { display:block; width:100%; height:auto; filter: drop-shadow(0 8px 20px rgba(0,0,0,.5)) var(--ring); }
+    section { padding: 72px 0; }
+    .section-title { font-size: clamp(1.6rem, 2vw + .6rem, 2.2rem); margin: 0 0 8px; }
+    .section-desc { color: var(--muted); margin: 0 0 32px; }
+    .cards { display:grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .card { padding: 22px; border-radius: 16px; border: 1px solid rgba(255,255,255,.08); background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.00)); box-shadow: var(--glow); }
+    .card h3 { margin: 0 0 6px; }
+    .card p { margin: 0; color: #cfe9ff; }
+    .badge { display:inline-block; padding: 6px 10px; border-radius: 999px; font-size: .75rem; letter-spacing:.2px; color:#00131a; background: linear-gradient(90deg, var(--cyan), var(--violet)); font-weight:800; margin-bottom: 10px; }
+    .twocol { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+    .list li { margin-bottom: 10px; color: #cfe9ff; }
+    footer { padding: 40px 0; border-top: 1px solid rgba(255,255,255,.08); color: var(--muted); }
+    .footgrid { display:grid; grid-template-columns: 2fr 1fr; gap: 20px; align-items:center; }
+    .small { font-size:.9rem; }
+    .contact { display:flex; gap: 12px; align-items:center; flex-wrap: wrap; }
+    .contact .pill { padding: 8px 12px; border: 1px solid rgba(255,255,255,.15); border-radius: 999px; }
+    @media (max-width: 900px) {
+      .hero .content { grid-template-columns: 1fr; }
+      .cards { grid-template-columns: 1fr; }
+      .twocol { grid-template-columns: 1fr; }
+      .links a { margin-left: 12px; }
+    }
+  </style>
 </head>
 <body>
-  <div class="bg"></div>
+  <header>
+    <div class="wrap">
+      <nav>
+        <div class="brand">
+          <svg width="160" height="48" viewBox="0 0 320 96" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1">
+      <stop offset="0%" stop-color="#00f2ff"/>
+      <stop offset="100%" stop-color="#9a4dff"/>
+    </linearGradient>
+  </defs>
+  <rect rx="12" width="320" height="96" fill="none" stroke="url(#g)" stroke-width="4"/>
+  <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle"
+        font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif"
+        font-weight="800" font-size="28" fill="url(#g)">FrableTech</text>
+</svg>
+          <div class="name">FrableTech</div>
+        </div>
+        <div class="links">
+          <a href="#services">Services</a>
+          <a href="#work">3D Printing</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+    </div>
+  </header>
 
-  <main class="card">
-    <div class="badge">🚧 Under Construction</div>
-    <h1>We’re building something new</h1>
-    <p class="lede">
-      Thanks for stopping by! Our site is in progress.
-      We’ll be live shortly—stay tuned.
-    </p>
-
-    <div class="barberpole" aria-hidden="true"></div>
-
-    <section class="info">
-      <div class="pill">
-        <span class="dot"></span>
-        Estimated launch: <strong>Q4 2025</strong>
+  <section class="hero">
+    <div class="hero-grid"></div>
+    <div class="wrap">
+      <div class="content">
+        <div>
+          <div class="kicker">Enid, Oklahoma</div>
+          <h1>IT Consulting & <span class="grad">3D Printing/Design</span></h1>
+          <p class="lead">I help small businesses, teams, and makers in Enid, OK modernize their tech stack and turn ideas into physical products. From networks and automations to custom part design and on‑demand prints, I bring a clean, neon‑futurist edge to practical solutions.</p>
+          <div class="cta">
+            <a class="btn primary" href="#contact">Start a project</a>
+            <a class="btn" href="#services">What I do</a>
+          </div>
+        </div>
+        <div class="illus panel">
+          <div style='padding:40% 0;text-align:center;color:#a5b6c7'>Add a hero image</div>
+        </div>
       </div>
-      <div class="pill">
-        <span class="dot green"></span>
-        Status: <strong>In active development</strong>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="wrap">
+      <h2 class="section-title">Services</h2>
+      <p class="section-desc">Drafted like modern IT sites — with a Tron‑inspired glow.</p>
+      <div class="cards">
+        <div class="card">
+          <span class="badge">IT Consulting</span>
+          <h3>Networks • Security • Automation</h3>
+          <p>Small‑business infrastructure planning, Wi‑Fi & VLANs, NAS/backup, Windows/Mac fleet setup, cloud identity, and automation workflows (PowerShell, Bash, Office scripts).</p>
+        </div>
+        <div class="card">
+          <span class="badge">3D Printing</span>
+          <h3>P1S • X1C • AMS • PLA/PETG/TPU</h3>
+          <p>Rapid prototyping and production prints with tuned profiles. Functional parts, aesthetic pieces, and batch runs — shipped or local pickup in Enid.</p>
+        </div>
+        <div class="card">
+          <span class="badge">Design</span>
+          <h3>CAD • Remix • Fit‑for‑Purpose</h3>
+          <p>Parametric modeling and remixes for perfect fit: adapters, mounts, covers, and fixtures. Iteration with fast feedback loops.</p>
+        </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <form class="notify" action="https://formspree.io/f/your-form-id" method="POST">
-      <label for="email">Get notified at launch</label>
-      <div class="row">
-        <input id="email" name="email" type="email" placeholder="you@example.com" required />
-        <button type="submit">Notify me</button>
+  <section id="work">
+    <div class="wrap">
+      <div class="twocol">
+        <div>
+          <h2 class="section-title">3D Printing & Design</h2>
+          <p class="section-desc">From idea → CAD → print. Clean tolerances, real‑world function.</p>
+          <ul class="list">
+            <li>Printer fleet: Bambu Lab (P1S, X1 Carbon, AMS)</li>
+            <li>Materials: PLA, PLA‑CF, PETG, TPU</li>
+            <li>Deliverables: .3mf, STLs, test coupons, and print profiles</li>
+            <li>Use cases: dust collection adapters, key covers, mounts, organizers</li>
+          </ul>
+        </div>
+        <div class="panel" style="padding:22px">
+          <h3 style="margin-top:0">Why FrableTech?</h3>
+          <p class="small">I blend IT discipline with maker speed. That means better planning, better documentation, and reliable, repeatable results — whether it’s a network rollout or a precision part.</p>
+          <div class="contact" style="margin-top:10px">
+            <div class="pill">Based in Enid, OK</div>
+            <div class="pill">Lead time: typically fast</div>
+            <div class="pill">NDA‑friendly</div>
+          </div>
+        </div>
       </div>
-      <small>No spam. Unsubscribe anytime.</small>
-    </form>
+    </div>
+  </section>
 
-    <ul class="links">
-      <li><a href="mailto:hello@example.com" class="link">Contact</a></li>
-      <li><a href="https://twitter.com/" class="link">Twitter/X</a></li>
-      <li><a href="https://www.linkedin.com/" class="link">LinkedIn</a></li>
-    </ul>
+  <section id="about">
+    <div class="wrap">
+      <h2 class="section-title">About</h2>
+      <p class="section-desc">I’m Brian (“FrableTech”). I support teams with hands‑on IT and precise 3D printing/design. If you’re in Enid or nearby, I’m local. Remote help available as well.</p>
+      <div class="cards">
+        <div class="card">
+          <h3>Tooling</h3>
+          <p>PowerShell • Bash • Python • Excel automation • macOS/Windows • VLAN/Wi‑Fi • NAS/Backups</p>
+        </div>
+        <div class="card">
+          <h3>Design</h3>
+          <p>Fusion / Onshape • Parametric parts • Print‑ready .3mf • Custom remixes for fit</p>
+        </div>
+        <div class="card">
+          <h3>Approach</h3>
+          <p>Clear scope, quick prototypes, documented settings, and steady iteration — all with that neon‑grid flair.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <footer>
-      <p>© <span id="year"></span> Your Company. All rights reserved.</p>
-    </footer>
-  </main>
+  <section id="contact">
+    <div class="wrap">
+      <h2 class="section-title">Contact</h2>
+      <p class="section-desc">Tell me a bit about your project — I’ll get back quickly.</p>
+      <div class="twocol">
+        <form class="panel" style="padding:18px" onsubmit="event.preventDefault(); alert('Thanks! I\'ll reach out shortly.');">
+          <label class="small">Your name</label>
+          <input required name="name" style="width:100%; padding:12px; margin:6px 0 12px; background:#0a142b; border:1px solid rgba(255,255,255,.15); color:var(--text); border-radius:10px;">
+          <label class="small">Email</label>
+          <input required type="email" name="email" style="width:100%; padding:12px; margin:6px 0 12px; background:#0a142b; border:1px solid rgba(255,255,255,.15); color:var(--text); border-radius:10px;">
+          <label class="small">What do you need?</label>
+          <textarea required name="msg" rows="5" style="width:100%; padding:12px; margin:6px 0 12px; background:#0a142b; border:1px solid rgba(255,255,255,.15); color:var(--text); border-radius:10px;"></textarea>
+          <button class="btn primary" type="submit">Send message</button>
+          <p class="small" style="margin-top:10px">Prefer email? <a href="mailto:hello@frabletech.com">hello@frabletech.com</a></p>
+        </form>
+        <div class="panel" style="padding:18px">
+          <h3 style="margin-top:0">Quick Info</h3>
+          <p class="small">Location: Enid, OK • Remote friendly</p>
+          <p class="small">Hours: Flexible by appointment</p>
+          <div class="contact" style="margin-top:10px">
+            <a class="pill" href="mailto:hello@frabletech.com">Email</a>
+            <a class="pill" href="#" onclick="alert('LinkedIn placeholder — add your profile URL'); return false;">LinkedIn</a>
+            <a class="pill" href="#" onclick="alert('MakerWorld placeholder — add your profile URL'); return false;">MakerWorld</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <script>
-    // Set current year
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  <footer>
+    <div class="wrap footgrid">
+      <div>&copy; 2025-09-15 FrableTech — IT Consulting & 3D Printing in Enid, OK.</div>
+      <div style="text-align:right">Theme: <span class="grad">Neon Grid / Tron‑inspired</span></div>
+    </div>
+  </footer>
 </body>
 </html>
