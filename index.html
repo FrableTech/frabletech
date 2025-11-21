@@ -222,16 +222,35 @@
       <h2 class="section-title">Contact</h2>
       <p class="section-desc">Tell me a bit about your project — I’ll get back quickly.</p>
       <div class="twocol">
-        <form class="panel" style="padding:18px" onsubmit="event.preventDefault(); alert('Thanks! I\'ll reach out shortly.');">
+        <form class="panel" style="padding:18px" method="POST" action="https://formspree.io/f/mwpydbbl">
+          <!-- Formspree endpoint configured: https://formspree.io/f/mwpydbbl -->
+          <!-- Hidden fields for Formspree -->
+          <input type="hidden" name="_subject" value="New contact from frabletech.com">
+          <input type="hidden" name="_next" value="https://frabletech.com/thank-you.html">
+          <!-- Formspree uses _replyto for reply address and _gotcha as a honeypot -->
+          <input type="hidden" name="_replyto" id="_replyto">
+          <input type="text" name="_gotcha" style="display:none;">
+
           <label class="small">Your name</label>
           <input required name="name" style="width:100%; padding:12px; margin:6px 0 12px; background:#0a142b; border:1px solid rgba(255,255,255,.15); color:var(--text); border-radius:10px;">
           <label class="small">Email</label>
-          <input required type="email" name="email" style="width:100%; padding:12px; margin:6px 0 12px; background:#0a142b; border:1px solid rgba(255,255,255,.15); color:var(--text); border-radius:10px;">
+          <input required type="email" name="email" id="email" style="width:100%; padding:12px; margin:6px 0 12px; background:#0a142b; border:1px solid rgba(255,255,255,.15); color:var(--text); border-radius:10px;">
           <label class="small">What do you need?</label>
-          <textarea required name="msg" rows="5" style="width:100%; padding:12px; margin:6px 0 12px; background:#0a142b; border:1px solid rgba(255,255,255,.15); color:var(--text); border-radius:10px;"></textarea>
+          <textarea required name="message" rows="5" style="width:100%; padding:12px; margin:6px 0 12px; background:#0a142b; border:1px solid rgba(255,255,255,.15); color:var(--text); border-radius:10px;"></textarea>
           <button class="btn primary" type="submit">Send message</button>
           <p class="small" style="margin-top:10px">Prefer email? <a href="mailto:josh@frabletech.com">josh@frabletech.com</a></p>
         </form>
+        <script>
+          (function(){
+            var form = document.querySelector('form.panel');
+            if (!form) return;
+            form.addEventListener('submit', function(){
+              var email = document.getElementById('email');
+              var reply = document.getElementById('_replyto');
+              if (email && reply) reply.value = email.value || '';
+            });
+          })();
+        </script>
         <div class="panel" style="padding:18px">
           <h3 style="margin-top:0">Quick Info</h3>
           <p class="small">Location: Enid, OK • Remote friendly</p>
